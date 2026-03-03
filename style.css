@@ -1138,31 +1138,36 @@ img {
 /* ── pricing-note: luôn 1 hàng ── */
 .pricing-note {
   display: flex;
-  align-items: flex-start;
+  flex-wrap: wrap;
+  /* fallback: xuống dòng nếu quá hẹp */
+  align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 32px;
+  gap: 6px 8px;
+  margin: 32px auto 0;
+  max-width: 620px;
+  padding: 12px 20px;
   font-size: 0.85rem;
+  line-height: 1.6;
   color: var(--text-muted);
   text-align: center;
-  padding: 12px 16px;
   background: rgba(66, 133, 244, 0.06);
   border: 1px solid rgba(66, 133, 244, 0.15);
   border-radius: 50px;
-  max-width: 620px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
 }
 
 .pricing-note svg {
   flex-shrink: 0;
-  margin-top: 2px;
+  /* icon không bị co */
   color: var(--primary);
 }
 
 .pricing-note span {
   flex: 1;
+  /* chiếm phần còn lại */
+  min-width: 0;
+  /* ← FIX CHÍNH: cho phép flex child co nhỏ */
+  overflow-wrap: break-word;
+  word-break: break-word;
   text-align: center;
 }
 
@@ -1200,14 +1205,25 @@ img {
   }
 
   .pricing-note {
-    font-size: 0.78rem;
-    padding: 10px 14px;
-    border-radius: 16px;
-    text-align: left;
+    /* Trên mobile: bỏ pill shape → block bình thường để text tràn full width */
+    display: block;
+    border-radius: 12px;
+    padding: 12px 14px;
     max-width: 100%;
+    font-size: 0.8rem;
+    text-align: left;
+  }
+
+  .pricing-note svg {
+    /* Icon hiển thị inline trước text */
+    display: inline;
+    vertical-align: middle;
+    margin-right: 4px;
+    margin-top: -2px;
   }
 
   .pricing-note span {
+    display: inline;
     text-align: left;
   }
 
